@@ -1,5 +1,8 @@
 import pygame as pg
-def main():
-    print('hello')
-main()
+
 pg.init()
+
+clock = pg.time.Clock()
+pg.display.set_caption("Top Down Shooter")
+
+
