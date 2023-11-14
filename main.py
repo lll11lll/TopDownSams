@@ -1,5 +1,4 @@
 import pygame as pg
-def main():
-    print('hello')
-main()
+from settings import *
 pg.init()
+e((WIDTH, HEIGHT))
