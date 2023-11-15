@@ -1,7 +1,6 @@
 import pygame as pg
 from math import sqrt, atan2, pi
 
-
 class Player(pg.sprite.Sprite): 
     def __init__(self, x, y):
         # Creation of player, and creating the rect with provide x and y
@@ -12,17 +11,22 @@ class Player(pg.sprite.Sprite):
         self.speed = 5
         self.mouseX, self.mouseY = pg.mouse.get_pos()
 
-    def draw(self, window):
-            #get mouse position and angles
+    def draw(self, window, image):
+        BLACK = (0,0,0)
+        # Drawing the sprite to the window
+        window.blit(image, self.rect)
+        arc = pg.draw.arc(window, BLACK, (self.rect), 0, 3.14/2)
+    
+
+    def rotate(self):
+    #get mouse position and angles
         relativeX = self.mouseX - self.rect.x
         relativeY = self.mouseY - self.rect.y
         angle = ((180/pi)*-atan2(relativeY, relativeX))
-        self.image = pg.transform.rotate(self.survivor, int(angle-90))
-        # Drawing the sprite to the window
-        window.blit(self.image, self.rect)
+        return pg.transform.rotate(self.survivor, int(angle-90))
     
     def update(self):
-       
+        self.mouseX, self.mouseY = pg.mouse.get_pos()
         key = pg.key.get_pressed()
 
         #self.rect = self.image.get_rect()

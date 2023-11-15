@@ -13,9 +13,9 @@ backgroundImage =  pg.transform.scale(pg.image.load('background.png'), (WIDTH, H
 
 def drawWindow(player):
     WIN.blit(backgroundImage, (0,0))
-    player.update()
-    player.draw(WIN)
-    
+    image = player.rotate()
+    player.draw(WIN, image)
+    player.update() 
     pg.display.update()
 
 
