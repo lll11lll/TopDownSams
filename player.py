@@ -8,7 +8,8 @@ class Player(pg.sprite.Sprite):
         self.rect = self.survivor.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.speed = 5
+        self.speed = 5 
+
 
 
     def draw(self, window):
