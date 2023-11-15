@@ -1,5 +1,5 @@
 import pygame as pg
-from math import sqrt
+from math import sqrt, atan2, pi
 
 class Player(pg.sprite.Sprite): 
     def __init__(self, x, y):
@@ -9,18 +9,32 @@ class Player(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.speed = 5 
+        self.speed = 5
+        self.mouseX, self.mouseY = pg.mouse.get_pos()
 
 
 
     def draw(self, window):
+    def draw(self, window, image):
+        BLACK = (0,0,0)
         # Drawing the sprite to the window
-        window.blit(self.survivor, self.rect)
+        window.blit(image, self.rect)
+        arc = pg.draw.arc(window, BLACK, (self.rect), 0, 3.14/2)
+    
+
+    def rotate(self):
+    #get mouse position and angles
+        relativeX = self.mouseX - self.rect.x
+        relativeY = self.mouseY - self.rect.y
+        angle = ((180/pi)*-atan2(relativeY, relativeX))
+        return pg.transform.rotate(self.survivor, int(angle-90))
     
     def update(self):
-        # Checking for key presses and moving the player accordingly
-
+        self.mouseX, self.mouseY = pg.mouse.get_pos()
         key = pg.key.get_pressed()
 
+        #self.rect = self.image.get_rect()
+        # Checking for key presses and moving the player accordingly
         # Checks if the player uses 2 keys at once and adjusts their speed to the same value as if they were only using 1 key
         # Up and Right
         if key[pg.K_w] and key[pg.K_d]:
