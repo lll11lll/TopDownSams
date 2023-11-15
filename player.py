@@ -14,7 +14,6 @@ class Player(pg.sprite.Sprite):
 
 
 
-    def draw(self, window):
     def draw(self, window, image):
         BLACK = (0,0,0)
         # Drawing the sprite to the window
