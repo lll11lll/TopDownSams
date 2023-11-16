@@ -1,28 +1,36 @@
 import pygame as pg
 from math import sqrt, atan2, pi
 
+
+
+# INSTEAD OF CREATING THE ARC USING PYGAME.draw
+# Create my own arc sprite and use that instead
+
+# create an arc class?
+# 
+
 class Player(pg.sprite.Sprite): 
-    def __init__(self, x, y):
+    def __init__(self, x, y, win):
         # Creation of player, and creating the rect with provide x and y
         self.survivor = pg.image.load('Survivor1/survivor1Hold.png')
         self.rect = self.survivor.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.speed = 5 
-        self.speed = 5
         self.mouseX, self.mouseY = pg.mouse.get_pos()
+        self.arc = pg.image.load('Arc2.png')
+        self.arcRect = self.arc.get_rect()
+        self.win = win
 
 
 
     def draw(self, window, image):
-        BLACK = (0,0,0)
         # Drawing the sprite to the window
         window.blit(image, self.rect)
-        arc = pg.draw.arc(window, BLACK, (self.rect), 0, 3.14/2)
     
 
     def rotate(self):
-    #get mouse position and angles
+    # Get mouse position and angles
         relativeX = self.mouseX - self.rect.x
         relativeY = self.mouseY - self.rect.y
         angle = ((180/pi)*-atan2(relativeY, relativeX))
@@ -70,4 +78,9 @@ class Player(pg.sprite.Sprite):
         elif key[pg.K_s]:
             self.rect.y += self.speed
         
-            
+        elif key[pg.K_SPACE]:
+            # create arc from arc class
+            self.arcRect.x = self.rect.x 
+            self.arcRect.y = self.rect.y 
+           
+            self.win.blit(self.arc,  (self.arcRect.x, self.arcRect.y - self.survivor.get_height() ))
