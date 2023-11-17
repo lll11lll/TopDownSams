@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 from settings import *
 from player import *
 
@@ -16,9 +17,9 @@ def drawWindow(player):
 
     # I think we should get rid of this image = player.rotate() and just have player.rotate() in the draw function of player.py,
     # It would create cleaner and more readable code
-    image = player.rotate()
-    player.draw(WIN, image)
+    #image = player.rotate()
     player.update() 
+    player.draw()
     pg.display.update()
 
 
@@ -30,5 +31,6 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
+                sys.exit()
         drawWindow(player)
 main()

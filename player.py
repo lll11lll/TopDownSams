@@ -24,9 +24,9 @@ class Player(pg.sprite.Sprite):
 
 
 
-    def draw(self, window, image):
+    def draw(self):
         # Drawing the sprite to the window
-        window.blit(image, self.rect)
+        self.win.blit(self.image, self.rect)
     
 
     def rotate(self):
@@ -34,7 +34,7 @@ class Player(pg.sprite.Sprite):
         relativeX = self.mouseX - self.rect.x
         relativeY = self.mouseY - self.rect.y
         angle = ((180/pi)*-atan2(relativeY, relativeX))
-        return pg.transform.rotate(self.survivor, int(angle-90))
+        self.image = pg.transform.rotate(self.survivor, int(angle-90))
     
     def update(self):
         self.mouseX, self.mouseY = pg.mouse.get_pos()
@@ -84,3 +84,5 @@ class Player(pg.sprite.Sprite):
             self.arcRect.y = self.rect.y 
            
             self.win.blit(self.arc,  (self.arcRect.x, self.arcRect.y - self.survivor.get_height() ))
+        
+        self.rotate()
